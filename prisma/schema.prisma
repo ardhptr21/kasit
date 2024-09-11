@@ -13,5 +13,24 @@ model User {
   nrp      String @unique
   password String
 
+  transactions Transaction[]
+
   @@map("users")
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  amount    Int
+  type      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("transactions")
+}
+
+enum TransactionType {
+  CASH
+  SAWERIA
 }
