@@ -18,7 +18,7 @@ export default function TableListTransaction() {
     s.search,
   ]);
 
-  const { data, isFetching } = useListTransactionsStrict({
+  const { data } = useListTransactionsStrict({
     monthly,
     q: search,
   });

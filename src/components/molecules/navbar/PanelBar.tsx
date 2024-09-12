@@ -17,6 +17,10 @@ const panelLinks: PanelLink[] = [
     href: "/panel/transactions",
     label: "Transactions",
   },
+  {
+    href: "/panel/students",
+    label: "Students",
+  },
 ];
 
 export default function PanelBar() {

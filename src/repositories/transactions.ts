@@ -36,5 +36,6 @@ export const findTransactionsStrictWithDate = async ({
       createdAt: true,
       user: { select: { name: true, nrp: true } },
     },
+    orderBy: { user: { nrp: "asc" } },
   });
 };
