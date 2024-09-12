@@ -1,3 +1,5 @@
+import PanelTitle from "@/components/atoms/panel/PanelTitle";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -7,14 +9,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TicketPlus } from "lucide-react";
+import Link from "next/link";
 
 export default function History() {
   return (
     <>
       <section className="container">
-        <div>
-          <h1 className="text-3xl font-bold">Transactions</h1>
-          <p>The history or list of transactions data</p>
+        <div className="flex justify-between">
+          <PanelTitle
+            title="Transactions"
+            description="The history or list of transactions data"
+          />
+          <Button asChild className="gap-2 items-center">
+            <Link href="/panel/transactions/add">
+              <TicketPlus size={18} /> Add New
+            </Link>
+          </Button>
         </div>
       </section>
       <section className="container mt-8">
