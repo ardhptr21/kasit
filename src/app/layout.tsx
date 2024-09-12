@@ -1,4 +1,6 @@
+import QueryProvider from "@/providers/query-provider";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -7,7 +9,10 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster richColors={true} />
+      </body>
     </html>
   );
 }

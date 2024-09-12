@@ -2,17 +2,18 @@
 
 import SearchNRPInput from "@/components/molecules/transaction/add/SearchNRPInput";
 import TransactionAddForm from "@/components/molecules/transaction/add/TransactionAddForm";
+import { User } from "@prisma/client";
 import { useState } from "react";
 
 export default function AddNewTransaction() {
-  const [nrp, setNrp] = useState<string | null>(null);
+  const [user, setUser] = useState<Omit<User, "password"> | null>(null);
 
   return (
     <>
-      {nrp ? (
-        <TransactionAddForm onAddCancel={() => setNrp(null)} />
+      {user ? (
+        <TransactionAddForm user={user} onAddCancel={() => setUser(null)} />
       ) : (
-        <SearchNRPInput onFindNRP={(nrp) => setNrp(nrp)} />
+        <SearchNRPInput onFindNRP={(u) => setUser(u)} />
       )}
     </>
   );

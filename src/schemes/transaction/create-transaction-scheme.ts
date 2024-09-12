@@ -1,10 +1,8 @@
-import { create } from "domain";
 import { z } from "zod";
 
-export const createTransaction = z.object({
-    amount: z.coerce.number().min(0),
-    type: z.enum(["CASH", "SAWERIA"]),
-    createdAt: z.string().datetime(),
-})
+export const createTransactionSceme = z.object({
+  amount: z.coerce.number().min(0),
+  createdAt: z.string().date(),
+});
 
-export type CreateTransaction = z.infer<typeof createTransaction>;
+export type CreateTransactionScheme = z.infer<typeof createTransactionSceme>;
