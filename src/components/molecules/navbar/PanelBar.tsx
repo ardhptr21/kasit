@@ -14,8 +14,8 @@ const panelLinks: PanelLink[] = [
     label: "Dashboard",
   },
   {
-    href: "/panel/history",
-    label: "History",
+    href: "/panel/transactions",
+    label: "Transactions",
   },
 ];
 
