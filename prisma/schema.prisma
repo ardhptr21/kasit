@@ -19,15 +19,24 @@ model User {
 }
 
 model Transaction {
-  id        String   @id @default(cuid())
-  userId    String   @map("user_id")
+  id        String          @id @default(cuid())
+  userId    String          @map("user_id")
   amount    Int
-  type      String
-  createdAt DateTime @default(now()) @map("created_at")
+  type      TransactionType @default(CASH)
+  createdAt DateTime        @default(now()) @map("created_at")
 
   user User @relation(fields: [userId], references: [id])
 
   @@map("transactions")
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  amount    Int
+  purpose   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("expenses")
 }
 
 enum TransactionType {
