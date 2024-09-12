@@ -1,5 +1,6 @@
 "use client";
 
+import { createTransactionAction } from "@/actions/transaction";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,7 +22,9 @@ import {
 } from "@/schemes/transaction/create-transaction-scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@prisma/client";
+import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface TransactionAddFormProps {
   onAddCancel?: () => void;
@@ -40,10 +43,21 @@ export default function TransactionAddForm({
       createdAt: new Date().toISOString().split("T")[0],
     },
   });
+  const action = createTransactionAction.bind(null, user.id);
 
-  const onSubmit = (data: CreateTransactionScheme) => {
-    console.log(data);
-  };
+  const { execute } = useAction(action, {
+    onExecute: () => {
+      toast.loading("Adding transaction...");
+    },
+    onSuccess: () => {
+      toast.success("Transaction added successfully");
+      form.reset();
+      onAddCancel?.();
+    },
+    onError: (error) => {
+      toast.error(error.error.serverError?.message);
+    },
+  });
 
   return (
     <section className="container max-w-xl mt-10">
@@ -54,7 +68,7 @@ export default function TransactionAddForm({
         </CardHeader>
       </Card>
       <Form {...form}>
-        <form className="mt-5 space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="mt-5 space-y-5" onSubmit={form.handleSubmit(execute)}>
           <FormField
             name="amount"
             render={({ field }) => (

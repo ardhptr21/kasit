@@ -1,22 +1,25 @@
 import db from "@/lib/db";
-import { CreateTransaction } from "@/schemes/transaction/create-transaction-scheme";
+import { CreateTransactionScheme } from "@/schemes/transaction/create-transaction-scheme";
 
-
-export const createTransaction = async (userId: string, payload: CreateTransaction) => {
-    return await db.transaction.create({
-        data: {
-            userId: userId,
-            ...payload,
-        },
-    });
+export const createTransaction = async (
+  userId: string,
+  payload: CreateTransactionScheme
+) => {
+  return await db.transaction.create({
+    data: {
+      userId: userId,
+      ...payload,
+      createdAt: new Date(payload.createdAt),
+    },
+  });
 };
 
 export const findTransaction = async (date: Date) => {
-    return await db.transaction.findMany({
-        where: {
-            createdAt:{
-                gte: date,
-            },
-        },
-    });
+  return await db.transaction.findMany({
+    where: {
+      createdAt: {
+        gte: date,
+      },
+    },
+  });
 };
