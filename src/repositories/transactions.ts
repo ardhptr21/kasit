@@ -14,12 +14,27 @@ export const createTransaction = async (
   });
 };
 
-export const findTransaction = async (date: Date) => {
+export const findTransactionsStrictWithDate = async ({
+  date,
+  search,
+}: {
+  date: Date;
+  search?: string | null;
+}) => {
+  const start = new Date(date);
+  const end = new Date(date.setMonth(date.getMonth() + 1));
+
   return await db.transaction.findMany({
     where: {
-      createdAt: {
-        gte: date,
-      },
+      createdAt: { gte: start, lt: end },
+      user: { name: { contains: search || undefined, mode: "insensitive" } },
+    },
+    select: {
+      id: true,
+      amount: true,
+      type: true,
+      createdAt: true,
+      user: { select: { name: true, nrp: true } },
     },
   });
 };
