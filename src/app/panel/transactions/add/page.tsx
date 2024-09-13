@@ -8,7 +8,7 @@ export default function AddTransaction() {
         <div className="text-center">
           <PanelTitle
             title="New Transaction"
-            description="Add new student transaction data (only cash payment)"
+            description="Add new student transaction data"
           />
         </div>
       </section>

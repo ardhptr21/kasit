@@ -18,6 +18,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   createTransactionSceme,
   CreateTransactionScheme,
 } from "@/schemes/transaction/create-transaction-scheme";
@@ -42,6 +49,7 @@ export default function TransactionAddForm({
     defaultValues: {
       amount: 15000,
       createdAt: new Date().toISOString().split("T")[0],
+      type: "CASH",
     },
   });
   const action = createTransactionAction.bind(null, user.id);
@@ -81,6 +89,26 @@ export default function TransactionAddForm({
                 <FormControl>
                   <Input placeholder="15000" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Type</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a transaction type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="CASH">CASH</SelectItem>
+                    <SelectItem value="SAWERIA">SAWERIA</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
