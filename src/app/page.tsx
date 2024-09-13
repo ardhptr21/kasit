@@ -11,9 +11,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const session = await auth();
 
-  if (session) {
-    redirect("/panel");
-  }
+  if (session) return redirect("/panel");
 
   return (
     <main className="h-screen flex justify-center items-center flex-col container">

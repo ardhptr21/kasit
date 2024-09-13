@@ -32,7 +32,7 @@ const panelLinks: PanelLink[] = [
 export default async function PanelBar() {
   const session = await auth();
   return (
-    <header className="sticky top-0 flex items-center w-full h-16 gap-4 border-b bg-background">
+    <header className="sticky z-50 top-0 flex items-center w-full h-16 gap-4 border-b bg-background">
       <nav className="container hidden  md:flex justify-between">
         <div className="flex flex-row items-center font-medium gap-5 text-sm">
           {panelLinks.map((link) => (
