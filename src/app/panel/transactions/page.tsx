@@ -32,7 +32,6 @@ export default async function TransactionsPanelPage() {
         </div>
       </section>
       <ListTransaction />
-      <div className="h-screen"></div>
     </>
   );
 }

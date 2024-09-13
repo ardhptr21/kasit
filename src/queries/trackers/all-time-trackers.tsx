@@ -10,7 +10,11 @@ type Response = {
     message: string;
   };
   data: {
-    income: number;
+    income: {
+      saweria: number;
+      cash: number;
+      all: number;
+    };
     expense: number;
     count: number;
   };

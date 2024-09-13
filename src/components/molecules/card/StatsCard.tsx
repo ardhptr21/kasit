@@ -4,6 +4,7 @@ import { LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 interface StatsCardProps {
+  children?: React.ReactNode;
   title: string;
   value: string;
   subtext?: string;
@@ -19,6 +20,7 @@ export default function StatsCard({
   isLoading,
   icon: Icon,
   subtext,
+  children,
 }: StatsCardProps) {
   if (isLoading) {
     return <StatsCardSkeleton />;
@@ -34,6 +36,7 @@ export default function StatsCard({
       <CardContent>
         <div className="space-y-2">
           <h3 className="text-3xl font-extrabold">{value}</h3>
+          {children}
           <p className="text-xs text-muted-foreground">{subtext}</p>
         </div>
       </CardContent>

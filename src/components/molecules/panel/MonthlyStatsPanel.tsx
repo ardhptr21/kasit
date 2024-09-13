@@ -2,7 +2,7 @@
 
 import { toCurrency } from "@/lib/utils";
 import { useGetMonthlyTrackers } from "@/queries/trackers/monthly-trackers";
-import { Coins, HandCoins, Users } from "lucide-react";
+import { Coins, HandCoins, Rabbit, Users, Wallet } from "lucide-react";
 import StatsCard from "../card/StatsCard";
 
 export default function MonthlyStatsPanel() {
@@ -14,11 +14,22 @@ export default function MonthlyStatsPanel() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
       <StatsCard
         title="Monthly Income"
-        value={toCurrency(data?.data.income)}
+        value={toCurrency(data?.data.income.all)}
         icon={Coins}
         subtext={`${monthName} income`}
         isLoading={isLoading}
-      />
+      >
+        <div className="flex gap-5">
+          <p className="flex items-center gap-2 text-sm">
+            <Rabbit size={20} />
+            {toCurrency(data?.data.income.saweria)}
+          </p>
+          <p className="flex items-center gap-2 text-sm">
+            <Wallet size={20} />
+            {toCurrency(data?.data.income.cash)}
+          </p>
+        </div>
+      </StatsCard>
       <StatsCard
         title="Monthly Expense"
         value={toCurrency(data?.data.expense)}
