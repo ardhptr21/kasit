@@ -12,7 +12,7 @@ export default async function TransactionsPanelPage() {
   return (
     <>
       <section className="container">
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-0">
           <PanelTitle
             title="Transactions"
             description="The history or list of transactions data"
@@ -20,7 +20,7 @@ export default async function TransactionsPanelPage() {
           {session?.user.role === UserRole.ADMIN && (
             <Button asChild className="gap-2 items-center">
               <Link href="/panel/transactions/add">
-                <TicketPlus size={18} /> Add New
+                <TicketPlus size={18} /> New Transaction
               </Link>
             </Button>
           )}

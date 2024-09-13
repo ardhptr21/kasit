@@ -1,6 +1,8 @@
 import NavLink from "@/components/atoms/navbar/NavLink";
+import ProfileDropdown from "@/components/atoms/navbar/ProfileDropdown";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { auth } from "@/lib/auth";
 import { Menu } from "lucide-react";
 
 type PanelLink = {
@@ -27,17 +29,21 @@ const panelLinks: PanelLink[] = [
   },
 ];
 
-export default function PanelBar() {
+export default async function PanelBar() {
+  const session = await auth();
   return (
     <header className="sticky top-0 flex items-center w-full h-16 gap-4 border-b bg-background">
-      <nav className="container hidden text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm">
-        {panelLinks.map((link) => (
-          <NavLink key={link.href} href={link.href}>
-            {link.label}
-          </NavLink>
-        ))}
+      <nav className="container hidden  md:flex justify-between">
+        <div className="flex flex-row items-center font-medium gap-5 text-sm">
+          {panelLinks.map((link) => (
+            <NavLink key={link.href} href={link.href}>
+              {link.label}
+            </NavLink>
+          ))}
+        </div>
+        <ProfileDropdown session={session} />
       </nav>
-      <div className="container md:hidden">
+      <div className="container flex justify-between items-center md:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="shrink-0">
@@ -55,6 +61,7 @@ export default function PanelBar() {
             </nav>
           </SheetContent>
         </Sheet>
+        <ProfileDropdown session={session} />
       </div>
     </header>
   );

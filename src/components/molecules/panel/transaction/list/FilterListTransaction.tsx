@@ -11,16 +11,16 @@ export default function FilterListTransaction() {
 
   return (
     <section className="container mt-8">
-      <div className="inline-flex gap-5">
+      <div className="flex flex-col md:flex-row gap-5">
         <Input
           type="month"
-          className="max-w-max"
+          className="w-full md:max-w-max"
           value={monthly}
           onChange={(e) => setMonthly(e.target.value)}
         />
         <Input
           placeholder="Search name"
-          className="w-96"
+          className="max-w-96"
           onChange={(e) => debouncedSearch(e.target.value)}
         />
       </div>

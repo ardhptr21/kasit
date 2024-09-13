@@ -10,7 +10,7 @@ export default async function ExpensesPanelPage() {
   return (
     <>
       <section className="container">
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-0">
           <PanelTitle
             title="Expenses"
             description="The tracking of expenses used"
