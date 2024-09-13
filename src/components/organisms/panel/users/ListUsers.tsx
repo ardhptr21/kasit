@@ -24,7 +24,7 @@ export default function ListUsers() {
         </TableHeader>
         <TableBody>
           {data?.data.map((user, idx) => (
-            <TableRow>
+            <TableRow key={user.id}>
               <TableCell>{idx + 1}</TableCell>
               <TableCell>{user.nrp}</TableCell>
               <TableCell>{user.name}</TableCell>

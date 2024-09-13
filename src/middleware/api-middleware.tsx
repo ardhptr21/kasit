@@ -1,6 +1,5 @@
 import { auth } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
-import { NextApiHandler } from "next";
 
 interface WithAuthApiOpts {
   roles?: UserRole[];
@@ -30,6 +29,6 @@ export function withAuthApi(handler: Function, opts?: WithAuthApiOpts) {
       });
     }
 
-    return handler(...args, session.user) as NextApiHandler;
+    return handler(...args, session.user);
   };
 }

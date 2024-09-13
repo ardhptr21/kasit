@@ -1,14 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient({
-    log: [
-      {
-        emit: "stdout",
-        level: "query",
-      },
-    ],
-  });
+  return new PrismaClient();
 };
 
 declare const globalThis: {
