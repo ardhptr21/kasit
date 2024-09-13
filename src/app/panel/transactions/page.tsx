@@ -4,7 +4,12 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
 import { TicketPlus } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Transactions - KasIT 2024",
+};
 
 export default async function TransactionsPanelPage() {
   const session = await auth();

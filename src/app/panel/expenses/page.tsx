@@ -4,6 +4,11 @@ import TableListExpense from "@/components/molecules/panel/expense/list/TableLis
 import NewExpenseModal from "@/components/molecules/panel/expense/NewExpenseModal";
 import { auth } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Expenses - KasIT 2024",
+};
 
 export default async function ExpensesPanelPage() {
   const session = await auth();

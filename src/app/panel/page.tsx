@@ -2,6 +2,11 @@ import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import AllTimeStatsPanel from "@/components/molecules/panel/AllTimeStatsPanel";
 import MonthlyStatsPanel from "@/components/molecules/panel/MonthlyStatsPanel";
 import { auth } from "@/lib/auth";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Panel - KasIT 2024",
+};
 
 export default async function Panel() {
   const session = await auth();
