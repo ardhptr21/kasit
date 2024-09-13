@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "KasIT - 2024",
 };
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/panel");
+  }
+
   return (
     <main className="h-screen flex justify-center items-center flex-col container">
       <div>
