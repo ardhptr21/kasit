@@ -18,7 +18,7 @@ export default function AllTimeStatsPanel() {
       />
       <StatsCard
         title="Expense"
-        value="Rp0"
+        value={toCurrency(data?.data.expense)}
         icon={HandCoins}
         subtext="All time expense"
         isLoading={isLoading}

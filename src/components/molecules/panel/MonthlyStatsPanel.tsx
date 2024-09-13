@@ -7,7 +7,6 @@ import StatsCard from "../card/StatsCard";
 
 export default function MonthlyStatsPanel() {
   const month = new Date().toISOString().split("T")[0].slice(0, 7);
-  // get human readable month
   const monthName = new Date().toLocaleString("default", { month: "long" });
   const { data, isLoading } = useGetMonthlyTrackers({ monthly: month });
 
@@ -22,7 +21,7 @@ export default function MonthlyStatsPanel() {
       />
       <StatsCard
         title="Monthly Expense"
-        value="Rp0"
+        value={toCurrency(data?.data.expense)}
         icon={HandCoins}
         subtext={`${monthName} expense`}
         isLoading={isLoading}

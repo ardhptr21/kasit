@@ -1,26 +1,28 @@
 import PanelTitle from "@/components/atoms/panel/PanelTitle";
-import ListTransaction from "@/components/organisms/panel/transaction/ListTransaction";
+import FilterListExpense from "@/components/molecules/panel/expense/list/FilterListExpense";
+import TableListExpense from "@/components/molecules/panel/expense/list/TableListExpense";
 import { Button } from "@/components/ui/button";
 import { TicketPlus } from "lucide-react";
 import Link from "next/link";
 
-export default function TransactionsPanelPage() {
+export default function ExpensesPanelPage() {
   return (
     <>
       <section className="container">
         <div className="flex justify-between">
           <PanelTitle
-            title="Transactions"
-            description="The history or list of transactions data"
+            title="Expenses"
+            description="The tracking of expenses used"
           />
           <Button asChild className="gap-2 items-center">
             <Link href="/panel/transactions/add">
-              <TicketPlus size={18} /> Add New
+              <TicketPlus size={18} /> New Expense
             </Link>
           </Button>
         </div>
       </section>
-      <ListTransaction />
+      <FilterListExpense />
+      <TableListExpense />
     </>
   );
 }

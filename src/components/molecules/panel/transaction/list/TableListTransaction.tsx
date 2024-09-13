@@ -37,7 +37,7 @@ export default function TableListTransaction() {
         </TableHeader>
         <TableBody>
           {data?.data.map((transaction) => (
-            <TableRow>
+            <TableRow key={transaction.id}>
               <TableCell className="font-medium">
                 {transaction.user.name}
               </TableCell>

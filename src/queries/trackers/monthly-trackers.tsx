@@ -13,6 +13,7 @@ type Response = {
   };
   data: {
     income: number;
+    expense: number;
     count: number;
   };
 };

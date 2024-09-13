@@ -18,6 +18,10 @@ const panelLinks: PanelLink[] = [
     label: "Transactions",
   },
   {
+    href: "/panel/expenses",
+    label: "Expenses",
+  },
+  {
     href: "/panel/students",
     label: "Students",
   },

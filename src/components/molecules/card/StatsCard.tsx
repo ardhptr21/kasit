@@ -33,7 +33,7 @@ export default function StatsCard({
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
-          <h3 className="text-4xl font-extrabold">{value}</h3>
+          <h3 className="text-3xl font-extrabold">{value}</h3>
           <p className="text-xs text-muted-foreground">{subtext}</p>
         </div>
       </CardContent>
@@ -51,7 +51,7 @@ export const StatsCardSkeleton = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <Skeleton className="h-10 w-72 bg-muted" />
+        <Skeleton className="h-8 w-72 bg-muted" />
         <Skeleton className="h-3 w-32 bg-muted mt-3" />
       </CardContent>
     </Card>

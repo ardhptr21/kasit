@@ -1,7 +1,10 @@
+import { Expense } from "@prisma/client";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
-type Params = {};
+type Params = {
+  monthly: string;
+};
 
 type Response = {
   meta: {
@@ -9,31 +12,27 @@ type Response = {
     success: boolean;
     message: string;
   };
-  data: {
-    income: number;
-    expense: number;
-    count: number;
-  };
+  data: Expense[];
 };
 
-export const getAllTimeTrackersHandler = async (
+export const getListExpensesStrict = async (
   params: Params
 ): Promise<Response> => {
-  const { data } = await axios.get<Response>(`/api/trackers/income-expense`, {
+  const { data } = await axios.get<Response>(`/api/expenses/strict`, {
     params,
   });
   return data;
 };
 
-export const useGetAllTimeTrackers = (
+export const useListExpensesStrict = (
   params: Params,
   options?: Partial<
     UseQueryOptions<Response, AxiosError<Omit<Response, "data">>>
   >
 ) => {
   return useQuery({
-    queryKey: ["all-time-trackers", params],
-    queryFn: () => getAllTimeTrackersHandler(params),
+    queryKey: ["list-expenses-strict", params],
+    queryFn: () => getListExpensesStrict(params),
     ...options,
   });
 };

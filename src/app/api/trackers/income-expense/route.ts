@@ -1,4 +1,4 @@
-import { calculateIncomeAndExpense } from "@/repositories/transactions";
+import { calculateIncomeAndExpense } from "@/repositories/trackers";
 
 export const dynamic = "force-dynamic";
 

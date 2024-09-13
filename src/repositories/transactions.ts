@@ -39,37 +39,3 @@ export const findTransactionsStrictWithDate = async ({
     orderBy: { user: { nrp: "asc" } },
   });
 };
-
-export const calculateIncomeAndExpense = async (date?: Date) => {
-  if (!date) {
-    const transaction = await db.transaction.aggregate({
-      _sum: {
-        amount: true,
-      },
-    });
-    return {
-      income: transaction._sum.amount,
-      count: -1,
-    };
-  }
-
-  const start = new Date(date);
-  const end = new Date(date.setMonth(date.getMonth() + 1));
-
-  const transaction = await db.transaction.aggregate({
-    where: {
-      createdAt: { gte: start, lt: end },
-    },
-    _sum: {
-      amount: true,
-    },
-    _count: {
-      amount: true,
-    },
-  });
-
-  return {
-    income: transaction._sum.amount,
-    count: transaction._count.amount,
-  };
-};

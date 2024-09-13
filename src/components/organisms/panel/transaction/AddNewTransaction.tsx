@@ -1,7 +1,7 @@
 "use client";
 
-import SearchNRPInput from "@/components/molecules/transaction/add/SearchNRPInput";
-import TransactionAddForm from "@/components/molecules/transaction/add/TransactionAddForm";
+import SearchNRPInput from "@/components/molecules/panel/transaction/add/SearchNRPInput";
+import TransactionAddForm from "@/components/molecules/panel/transaction/add/TransactionAddForm";
 import { User } from "@prisma/client";
 import { useState } from "react";
 

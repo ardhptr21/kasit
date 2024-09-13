@@ -1,9 +1,8 @@
-import { findTransactionsStrictWithDate } from "@/repositories/transactions";
+import { findExpensesStrictWithDate } from "@/repositories/expenses";
 import { NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   const searchParams = req.nextUrl.searchParams;
-  const q = searchParams.get("q");
   const monthly = searchParams.get("monthly");
 
   if (!monthly) {
@@ -19,10 +18,7 @@ export const GET = async (req: NextRequest) => {
     );
   }
 
-  const transactions = await findTransactionsStrictWithDate({
-    date: new Date(monthly!),
-    search: q,
-  });
+  const expenses = await findExpensesStrictWithDate(new Date(monthly));
 
   return Response.json({
     meta: {
@@ -30,6 +26,6 @@ export const GET = async (req: NextRequest) => {
       success: true,
       message: "Success",
     },
-    data: transactions,
+    data: expenses,
   });
 };
