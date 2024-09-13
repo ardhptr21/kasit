@@ -1,8 +1,9 @@
+import { withAuthApi } from "@/middleware/api-middleware";
 import { listUsers } from "@/repositories/user";
 
 export const dynamic = "force-dynamic";
 
-export const GET = async (req: Request) => {
+export const GET = withAuthApi(async (req: Request) => {
   const users = await listUsers();
 
   return Response.json(
@@ -16,4 +17,4 @@ export const GET = async (req: Request) => {
     },
     { status: 200 }
   );
-};
+});

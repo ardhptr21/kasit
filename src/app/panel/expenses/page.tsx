@@ -2,11 +2,11 @@ import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import FilterListExpense from "@/components/molecules/panel/expense/list/FilterListExpense";
 import TableListExpense from "@/components/molecules/panel/expense/list/TableListExpense";
 import NewExpenseModal from "@/components/molecules/panel/expense/NewExpenseModal";
-import { Button } from "@/components/ui/button";
-import { TicketPlus } from "lucide-react";
-import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { UserRole } from "@prisma/client";
 
-export default function ExpensesPanelPage() {
+export default async function ExpensesPanelPage() {
+  const session = await auth();
   return (
     <>
       <section className="container">
@@ -15,7 +15,7 @@ export default function ExpensesPanelPage() {
             title="Expenses"
             description="The tracking of expenses used"
           />
-          <NewExpenseModal />
+          {session?.user.role === UserRole.ADMIN && <NewExpenseModal />}
         </div>
       </section>
       <FilterListExpense />

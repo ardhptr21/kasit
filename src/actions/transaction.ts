@@ -1,11 +1,12 @@
 "use server";
 
-import { actionClient } from "@/lib/safe-action";
+import { authActionClient } from "@/lib/safe-action";
 import { createTransaction } from "@/repositories/transactions";
 import { createTransactionSceme } from "@/schemes/transaction/create-transaction-scheme";
+import { UserRole } from "@prisma/client";
 import { z } from "zod";
 
-export const createTransactionAction = actionClient
+export const createTransactionAction = authActionClient([UserRole.ADMIN])
   .schema(createTransactionSceme)
   .bindArgsSchemas<[userId: z.ZodString]>([z.string()])
   .action(async ({ parsedInput, bindArgsParsedInputs: [userId] }) => {

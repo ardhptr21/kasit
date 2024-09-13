@@ -1,16 +1,10 @@
 import PanelBar from "@/components/molecules/navbar/PanelBar";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { withAuth } from "@/middleware/component-middleware";
 import { PropsWithChildren } from "react";
 
 export const dynamic = "force-dynamic";
 
-export default async function PanelLayout({
-  children,
-}: Readonly<PropsWithChildren>) {
-  const session = await auth();
-  if (!session) return redirect("/");
-
+function PanelLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <>
       <PanelBar />
@@ -20,3 +14,5 @@ export default async function PanelLayout({
     </>
   );
 }
+
+export default withAuth(PanelLayout);

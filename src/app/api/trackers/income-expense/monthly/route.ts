@@ -1,9 +1,10 @@
+import { withAuthApi } from "@/middleware/api-middleware";
 import { calculateIncomeAndExpense } from "@/repositories/trackers";
 import { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export const GET = async (req: NextRequest) => {
+export const GET = withAuthApi(async (req: NextRequest) => {
   const searchParams = req.nextUrl.searchParams;
   const monthly = searchParams.get("monthly");
 
@@ -27,4 +28,4 @@ export const GET = async (req: NextRequest) => {
     },
     data,
   });
-};
+});

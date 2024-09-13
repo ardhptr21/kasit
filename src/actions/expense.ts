@@ -1,9 +1,11 @@
 "use server";
 
-import { actionClient } from "@/lib/safe-action";
+import { authActionClient } from "@/lib/safe-action";
 import { createExpense } from "@/repositories/expenses";
 import { createExpenseScheme } from "@/schemes/expense/create-expense-scheme";
-export const createExpenseAction = actionClient
+import { UserRole } from "@prisma/client";
+
+export const createExpenseAction = authActionClient([UserRole.ADMIN])
   .schema(createExpenseScheme)
   .action(async ({ parsedInput }) => {
     try {

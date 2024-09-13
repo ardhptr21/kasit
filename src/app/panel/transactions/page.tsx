@@ -1,10 +1,14 @@
 import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import ListTransaction from "@/components/organisms/panel/transaction/ListTransaction";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
+import { UserRole } from "@prisma/client";
 import { TicketPlus } from "lucide-react";
 import Link from "next/link";
 
-export default function TransactionsPanelPage() {
+export default async function TransactionsPanelPage() {
+  const session = await auth();
+
   return (
     <>
       <section className="container">
@@ -13,11 +17,13 @@ export default function TransactionsPanelPage() {
             title="Transactions"
             description="The history or list of transactions data"
           />
-          <Button asChild className="gap-2 items-center">
-            <Link href="/panel/transactions/add">
-              <TicketPlus size={18} /> Add New
-            </Link>
-          </Button>
+          {session?.user.role === UserRole.ADMIN && (
+            <Button asChild className="gap-2 items-center">
+              <Link href="/panel/transactions/add">
+                <TicketPlus size={18} /> Add New
+              </Link>
+            </Button>
+          )}
         </div>
       </section>
       <ListTransaction />

@@ -1,8 +1,9 @@
+import { withAuthApi } from "@/middleware/api-middleware";
 import { calculateIncomeAndExpense } from "@/repositories/trackers";
 
 export const dynamic = "force-dynamic";
 
-export const GET = async (req: Request) => {
+export const GET = withAuthApi(async (req: Request) => {
   const data = await calculateIncomeAndExpense();
 
   return Response.json({
@@ -13,4 +14,4 @@ export const GET = async (req: Request) => {
     },
     data,
   });
-};
+});

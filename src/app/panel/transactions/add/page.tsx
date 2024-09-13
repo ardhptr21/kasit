@@ -1,7 +1,8 @@
 import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import AddNewTransaction from "@/components/organisms/panel/transaction/AddNewTransaction";
+import { withAuth } from "@/middleware/component-middleware";
 
-export default function AddTransaction() {
+function AddTransaction() {
   return (
     <>
       <section className="container">
@@ -16,3 +17,5 @@ export default function AddTransaction() {
     </>
   );
 }
+
+export default withAuth(AddTransaction);
