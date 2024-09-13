@@ -1,6 +1,7 @@
 import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import FilterListExpense from "@/components/molecules/panel/expense/list/FilterListExpense";
 import TableListExpense from "@/components/molecules/panel/expense/list/TableListExpense";
+import NewExpenseModal from "@/components/molecules/panel/expense/NewExpenseModal";
 import { Button } from "@/components/ui/button";
 import { TicketPlus } from "lucide-react";
 import Link from "next/link";
@@ -14,11 +15,7 @@ export default function ExpensesPanelPage() {
             title="Expenses"
             description="The tracking of expenses used"
           />
-          <Button asChild className="gap-2 items-center">
-            <Link href="/panel/transactions/add">
-              <TicketPlus size={18} /> New Expense
-            </Link>
-          </Button>
+          <NewExpenseModal />
         </div>
       </section>
       <FilterListExpense />

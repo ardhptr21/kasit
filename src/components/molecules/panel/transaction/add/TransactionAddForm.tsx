@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
@@ -45,17 +46,20 @@ export default function TransactionAddForm({
   });
   const action = createTransactionAction.bind(null, user.id);
 
+  let toastId: number | string;
   const { execute } = useAction(action, {
     onExecute: () => {
-      toast.loading("Adding transaction...");
+      toastId = toast.loading("Adding transaction...");
     },
     onSuccess: () => {
-      toast.success("Transaction added successfully");
+      toast.success("Transaction added successfully", { id: toastId });
       form.reset();
-      onAddCancel?.();
+      setTimeout(() => {
+        onAddCancel?.();
+      }, 1000);
     },
     onError: (error) => {
-      toast.error(error.error.serverError?.message);
+      toast.error(error.error.serverError?.message, { id: toastId });
     },
   });
 
@@ -74,7 +78,9 @@ export default function TransactionAddForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Amount</FormLabel>
-                <Input placeholder="15000" {...field} />
+                <FormControl>
+                  <Input placeholder="15000" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -84,7 +90,9 @@ export default function TransactionAddForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Date</FormLabel>
-                <Input type="date" {...field} />
+                <FormControl>
+                  <Input type="date" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
