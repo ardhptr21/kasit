@@ -1,12 +1,13 @@
 import db from "@/lib/db";
 import { CreateTransactionScheme } from "@/schemes/transaction/create-transaction-scheme";
 
-export const isTransactionExistsByDate = async (date: Date) => {
+export const isTransactionExistsByDate = async (userId: string, date: Date) => {
   const start = new Date(date);
   const end = new Date(date.setMonth(date.getMonth() + 1));
   const count = await db.transaction.count({
     where: {
       createdAt: { gte: start, lt: end },
+      userId,
     },
   });
   return count > 0;

@@ -16,6 +16,7 @@ export const createTransactionAction = authActionClient([UserRole.ADMIN])
   .action(async ({ parsedInput, bindArgsParsedInputs: [userId] }) => {
     try {
       const exists = await isTransactionExistsByDate(
+        userId,
         new Date(parsedInput.createdAt)
       );
       if (exists)
