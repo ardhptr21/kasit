@@ -9,6 +9,7 @@ interface StatsCardProps {
   value: string;
   subtext?: string;
   isLoading?: boolean;
+  className?: string;
   icon: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
@@ -20,13 +21,14 @@ export default function StatsCard({
   isLoading,
   icon: Icon,
   subtext,
+  className,
   children,
 }: StatsCardProps) {
   if (isLoading) {
     return <StatsCardSkeleton />;
   }
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
         <div className="inline-flex justify-between items-center">
           <CardTitle>{title}</CardTitle>
@@ -49,7 +51,7 @@ export const StatsCardSkeleton = () => {
     <Card>
       <CardHeader>
         <div className="flex justify-between items-center w-full">
-          <Skeleton className="h-4 w-20 bg-muted" />
+          <Skeleton className="h-4 w-16 md:w-20 bg-muted" />
           <Skeleton className="h-6 w-6 bg-muted" />
         </div>
       </CardHeader>

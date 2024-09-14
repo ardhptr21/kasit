@@ -1,6 +1,7 @@
 import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import AllTimeStatsPanel from "@/components/molecules/panel/AllTimeStatsPanel";
 import MonthlyStatsPanel from "@/components/molecules/panel/MonthlyStatsPanel";
+import StatusStatsPanel from "@/components/molecules/panel/StatusStatsPanel";
 import { auth } from "@/lib/auth";
 import { Metadata } from "next";
 
@@ -20,6 +21,7 @@ export default async function Panel() {
         />
       </section>
       <section className="container mt-10 space-y-5">
+        <StatusStatsPanel userId={session!.user.id} />
         <AllTimeStatsPanel />
         <MonthlyStatsPanel />
       </section>

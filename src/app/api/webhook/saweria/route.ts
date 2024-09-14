@@ -38,7 +38,6 @@ export const POST = async (req: NextRequest) => {
   const result = saweriaHookScheme.safeParse(json);
 
   if (!result.success) {
-    console.log(result.error.flatten());
     return Response.json(
       {
         meta: {

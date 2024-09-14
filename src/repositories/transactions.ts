@@ -3,10 +3,15 @@ import { CreateTransactionScheme } from "@/schemes/transaction/create-transactio
 
 export const isTransactionExistsByDate = async (userId: string, date: Date) => {
   const start = new Date(date);
-  const end = new Date(date.setMonth(date.getMonth() + 1));
+  start.setDate(1);
+  start.setHours(0, 0, 0, 0);
+
+  const end = new Date(start);
+  end.setMonth(end.getMonth() + 1);
+
   const count = await db.transaction.count({
     where: {
-      createdAt: { gte: start, lt: end },
+      createdAt: { gt: start, lte: end },
       userId,
     },
   });
