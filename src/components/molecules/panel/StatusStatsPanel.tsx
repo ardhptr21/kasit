@@ -18,8 +18,12 @@ export default function StatusStatsPanel({ userId }: StatusStatsPanelProps) {
     <div>
       <StatsCard
         title="Status"
-        value={data?.data.status && !isLoading ? "Payed" : "Not payed"}
-        subtext={`You have already payed for ${monthName} month`}
+        value={data?.data.status && !isLoading ? "Paid" : "Unpaid"}
+        subtext={
+          data?.data.status
+            ? `You have paid for ${monthName} month`
+            : `You have not paid for ${monthName} month`
+        }
         icon={LoaderPinwheel}
         className={cn({
           "bg-green-50 text-green-500": data?.data.status,

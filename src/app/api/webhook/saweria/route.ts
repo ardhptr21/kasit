@@ -66,8 +66,23 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
+  const inc = Math.floor((data.amount_raw + data.cut) / 15000);
+  if (inc < 1) {
+    return Response.json(
+      {
+        meta: {
+          status: 400,
+          success: false,
+          message: "Bad Request",
+        },
+      },
+      { status: 400 }
+    );
+  }
+  const amount = 15000 * inc;
+
   await createTransaction(user.id, {
-    amount: data.amount_raw,
+    amount,
     type: "SAWERIA",
     createdAt: new Date().toISOString(),
   });
