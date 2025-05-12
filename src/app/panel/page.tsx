@@ -2,6 +2,7 @@ import PanelTitle from "@/components/atoms/panel/PanelTitle";
 import AllTimeStatsPanel from "@/components/molecules/panel/AllTimeStatsPanel";
 import MonthlyStatsPanel from "@/components/molecules/panel/MonthlyStatsPanel";
 import StatusStatsPanel from "@/components/molecules/panel/StatusStatsPanel";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/lib/auth";
 import { Metadata } from "next";
 
@@ -21,7 +22,28 @@ export default async function Panel() {
         />
       </section>
       <section className="container mt-10 space-y-5">
-        <StatusStatsPanel userId={session!.user.id} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Card>
+            <CardHeader>
+              <CardTitle>Saweria Link</CardTitle>
+              <CardDescription>
+                If you prefer to donate using Saweria, you can use the link below. You can confirm
+                to the treasurer if you already pay using Saweria.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <a
+                href="https://saweria.co/it2024"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl font-bold text-yellow-500 hover:underline"
+              >
+                https://saweria.co/it2024
+              </a>
+            </CardContent>
+          </Card>
+          <StatusStatsPanel userId={session!.user.id} />
+        </div>
         <AllTimeStatsPanel />
         <MonthlyStatsPanel />
       </section>

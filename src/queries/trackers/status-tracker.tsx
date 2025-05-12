@@ -3,6 +3,7 @@ import axios, { AxiosError } from "axios";
 
 type Params = {
   userId: string;
+  date: string;
 };
 
 type Response = {
@@ -14,20 +15,16 @@ type Response = {
   data: { status: boolean };
 };
 
-export const getStatusTrackerHandler = async (
-  params: Params
-): Promise<Response> => {
-  const { data } = await axios.get<Response>(
-    `/api/trackers/status/${params.userId}`
-  );
+export const getStatusTrackerHandler = async (params: Params): Promise<Response> => {
+  const { data } = await axios.get<Response>(`/api/trackers/status/${params.userId}`, {
+    params: { date: params.date },
+  });
   return data;
 };
 
 export const useGetStatusTracker = (
   params: Params,
-  options?: Partial<
-    UseQueryOptions<Response, AxiosError<Omit<Response, "data">>>
-  >
+  options?: Partial<UseQueryOptions<Response, AxiosError<Omit<Response, "data">>>>
 ) => {
   return useQuery({
     queryKey: ["status-tracker", params],

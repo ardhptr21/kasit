@@ -4,25 +4,39 @@ import { cn } from "@/lib/utils";
 import { useGetStatusTracker } from "@/queries/trackers/status-tracker";
 import { LoaderPinwheel } from "lucide-react";
 import StatsCard from "../card/StatsCard";
+import { Input } from "@/components/ui/input";
+import { useMemo, useState } from "react";
 
 interface StatusStatsPanelProps {
   userId: string;
 }
 
 export default function StatusStatsPanel({ userId }: StatusStatsPanelProps) {
-  const monthName = new Date().toLocaleString("default", { month: "long" });
+  const [date, setDate] = useState<Date>(new Date());
+  const monthName = useMemo(() => {
+    return date.toLocaleString("default", { month: "long" });
+  }, [date]);
 
-  const { isLoading, data } = useGetStatusTracker({ userId });
+  const { isLoading, data } = useGetStatusTracker({ userId, date: date.toISOString() });
 
   return (
-    <div>
+    <div className="space-y-5">
+      <Input
+        type="month"
+        className="max-w-max ml-auto"
+        value={date.toISOString().split("T")[0].slice(0, 7)}
+        onChange={(e) => {
+          const newDate = new Date(e.target.value);
+          setDate(newDate);
+        }}
+      />
       <StatsCard
         title="Status"
         value={data?.data.status && !isLoading ? "Paid" : "Unpaid"}
         subtext={
           data?.data.status
-            ? `You have paid for ${monthName} month`
-            : `You have not paid for ${monthName} month`
+            ? `You have paid for ${monthName} month ${date.getFullYear()}`
+            : `You have not paid for ${monthName} month ${date.getFullYear()}`
         }
         icon={LoaderPinwheel}
         className={cn({
